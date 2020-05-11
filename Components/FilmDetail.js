@@ -141,6 +141,13 @@ class FilmDetail extends React.Component {
         }
     }
 
+    /*
+    componentDidUpdate() {
+      console.log("componentDidUpdate : ")
+      console.log(this.props.favoritesFilm)
+    } 
+    */ 
+
     render () {
         return (
             <View style={styles.main_container}>
