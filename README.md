@@ -1,19 +1,16 @@
 # 🎬 MoviesAndMe, OpenClassrooms application in React-Native
 
-## To start the app :
-
+## Installation and Run :
 ```sh
-npx react-native start
+npm i
 npx react-native run-ios
 ```
 
-## Don't forget to enter your TMDB API key 
+## Don't forget to set your API TMDB Token in /API/TMDBApi.js file
 [THE MOVIE DB API](https://api.themoviedb.org)
-```sh
-TMDBApi.js
-```
 
 
-## Link to the class
+## Links
+[Tuto OpenClassRoom - Développez une application mobile React Native](https://openclassrooms.com/fr/courses/4902061-developpez-une-application-mobile-react-native)
+[Github du projet](https://github.com/Aximem/MoviesAndMe)
 
-[Développez une application mobile React Native](https://openclassrooms.com/fr/courses/4902061-developpez-une-application-mobile-react-native)
