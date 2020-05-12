@@ -6,6 +6,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import Search from '../Components/Search'
 import FilmDetail from '../Components/FilmDetail';
 import Favorites from '../Components/Favorites';
+import Test from '../Components/Test';
 
 const SearchStackNavigator = createStackNavigator({
   Search: { 
@@ -46,6 +47,16 @@ const MoviesTabNavigator = createBottomTabNavigator({
       tabBarIcon: () => {
         return <Image
         source={require('../Images/ic_favorite.png')}
+        style={styles.icon}/>
+      }
+    }
+  },
+  Test: {
+    screen: Test,
+    navigationOptions: {
+      tabBarIcon: () => {
+        return <Image
+        source={require('../Images/ic_test.png')}
         style={styles.icon}/>
       }
     }
