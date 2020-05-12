@@ -1,10 +1,10 @@
 # 🎬 MoviesAndMe, OpenClassrooms application in React-Native
 
-## To start the app, install first Expo, then :
+## To start the app :
 
 ```sh
-$ npm install
-$ npm start
+npx react-native start
+npx react-native run-ios
 ```
 
 ## Don't forget to enter your TMDB API key 
