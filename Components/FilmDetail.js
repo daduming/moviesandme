@@ -6,33 +6,36 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import numeral from 'numeral';
-
 import EnlargeShrink from '../Animations/EnlargeShrink';
 
 class FilmDetail extends React.Component {
+
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state
+    if (params.film != undefined && Platform.OS === 'ios'){
+      return {
+        headerRight: () => <TouchableOpacity
+        style={styles.share_touchable_headerrightbutton}
+        onPress={() => params.shareFilm()}>
+        <Image
+          style={styles.share_image}
+          source={require('../Images/ic_share.png')} />
+      </TouchableOpacity>
+      }
+    }
+  }
+  
   constructor(props) {
     super(props);
     this.state = {
       film: undefined,
       isLoading: false,
     };
+    this._toggleFavorite = this._toggleFavorite.bind(this)
     this._shareFilm = this._shareFilm.bind(this);
   }
 
-    static navigationOptions = ({ navigation }) => {
-      const { params } = navigation.state
-      if (params.film != undefined && Platform.OS === 'ios'){
-        return {
-          headerRight: () => <TouchableOpacity
-          style={styles.share_touchable_headerrightbutton}
-          onPress={() => params.shareFilm()}>
-          <Image
-            style={styles.share_image}
-            source={require('../Images/ic_share.png')} />
-        </TouchableOpacity>
-        }
-      }
-    }
+    
 
     _updateNavigationParams() {
       this.props.navigation.setParams({
@@ -56,6 +59,11 @@ class FilmDetail extends React.Component {
       this.props.dispatch(action)
     }
 
+    _toggleSeen() {
+      const action = { type: "TOGGLE_SEEN", value: this.state.film }
+      this.props.dispatch(action)
+    }
+
     _displayFavoriteImage() {
       var sourceImage = require('../Images/ic_favorite_border.png')
       var shouldEnlarge = false // Par défaut, si le film n'est pas en favoris, on veut qu'au clic sur le bouton, celui-ci s'agrandisse => shouldEnlarge à true
@@ -71,6 +79,21 @@ class FilmDetail extends React.Component {
           source={sourceImage}
         />
       </EnlargeShrink>
+      )
+    }
+
+    _displaySeenButton() {
+      if (this.props.seenFilms.findIndex(item => item.id === this.state.film.id) !== -1) {
+        return (
+          <Button
+            title='Non vu'
+            onPress={() => this._toggleSeen()}/>
+        )
+      }
+      return (
+        <Button
+          title='Marquer comme vu'
+          onPress={() => this._toggleSeen()}/>
       )
     }
 
@@ -101,6 +124,7 @@ class FilmDetail extends React.Component {
                 <Text style={styles.default_text}>Companie(s) : {film.production_companies.map(function(companie){
                     return companie.name
                 }).join(' / ')}</Text>
+                {this._displaySeenButton()}
             </ScrollView>
           )
         }
@@ -239,7 +263,8 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = (state) => {
   return {
-    favoritesFilm: state.toggleFavorite.favoritesFilm
+    favoritesFilm: state.toggleFavorite.favoritesFilm,
+    seenFilms: state.toggleSeen.seenFilms
   }
 } 
 
