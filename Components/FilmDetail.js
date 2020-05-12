@@ -1,24 +1,23 @@
-import React from 'react'
+import React from 'react';
 import { StyleSheet, Text, Share, Platform, View, ActivityIndicator, 
-  Image, Button, TouchableOpacity } from 'react-native'
-import { getFilmDetailFromApi, getImageFromApi } from '../Api/TMDBApi'
-import { ScrollView } from 'react-native-gesture-handler'
-import { connect } from 'react-redux'
-import moment from 'moment'
-import numeral from 'numeral'
+  Image, Button, TouchableOpacity } from 'react-native';
+import { getFilmDetailFromApi, getImageFromApi } from '../Api/TMDBApi';
+import { ScrollView } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
+import moment from 'moment';
+import numeral from 'numeral';
 
-import EnlargeShrink from '../Animations/EnlargeShrink'
+import EnlargeShrink from '../Animations/EnlargeShrink';
 
 class FilmDetail extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            film: undefined,
-            isLoading: false,
-        };
-        this._shareFilm = this._shareFilm.bind(this)
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      film: undefined,
+      isLoading: false,
+    };
+    this._shareFilm = this._shareFilm.bind(this);
+  }
 
     static navigationOptions = ({ navigation }) => {
       const { params } = navigation.state
